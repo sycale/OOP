@@ -1,7 +1,11 @@
 package vegetables;
-import vegetables.Vegetable.Vegetable;
+import vegetables.AbstractVegetable.AbstractVegetable;
+import vegetables.cucumber.Cucumber;
+import vegetables.garlic.Garlic;
+import vegetables.onion.Onion;
 import vegetables.saladbuilder.SaladBuilder;
 import vegetables.stockroom.StockRoom;
+import vegetables.tomato.Tomato;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,20 +15,12 @@ public class Main {
         StockRoom newStockRoom = new StockRoom();
         SaladBuilder saladBuilder = new SaladBuilder();
 
-        newStockRoom.addVeggies(Vegetable.BROCCOLI);
-        newStockRoom.addVeggies(Vegetable.CORN);
-        newStockRoom.addVeggies(Vegetable.CABBAGE);
-        newStockRoom.addVeggies(Vegetable.SWEETPOTATO);
-        newStockRoom.addVeggies(Vegetable.CARROT);
-        newStockRoom.addVeggies(Vegetable.CAULIFLOWER);
-        newStockRoom.addVeggies(Vegetable.CELERY);
-        newStockRoom.addVeggies(Vegetable.CUCUMBER);
+        for(AbstractVegetable _veggie: new ArrayList<AbstractVegetable>(Arrays.asList(new Onion(), new Cucumber(), new Garlic(), new Tomato()))) {
+            newStockRoom.addVeggies(_veggie);
+        }
 
-        saladBuilder.buildSalad(newStockRoom.takeSomeVegetables(new ArrayList<Vegetable>
-                (Arrays.asList(Vegetable.BROCCOLI, Vegetable.CELERY, Vegetable.CABBAGE)))
-        );
+        saladBuilder.buildSalad(newStockRoom.takeSomeVegetables(new ArrayList<AbstractVegetable>(Arrays.asList(new Onion(), new Cucumber()))));
 
         System.out.println(saladBuilder.getSaladReport());
-
     }
 }
