@@ -1,7 +1,7 @@
 package vegetables.garlic;
 
 import vegetables.AbstractVegetable.AbstractVegetable;
-import vegetables.vegetableEnum.VegetableEnum;
+import vegetables.vegetableFactory.VegetableEnum;
 
 public class Garlic extends AbstractVegetable {
     private Double calories = 5.4;

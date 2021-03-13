@@ -1,7 +1,7 @@
 package vegetables.tomato;
 
 import vegetables.AbstractVegetable.AbstractVegetable;
-import vegetables.vegetableEnum.VegetableEnum;
+import vegetables.vegetableFactory.VegetableEnum;
 
 public class Tomato extends AbstractVegetable {
     private Double calories = 1.6;

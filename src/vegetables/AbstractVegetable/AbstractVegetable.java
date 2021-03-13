@@ -1,6 +1,6 @@
 package vegetables.AbstractVegetable;
 
-import vegetables.vegetableEnum.VegetableEnum;
+import vegetables.vegetableFactory.VegetableEnum;
 
 public abstract class AbstractVegetable {
 

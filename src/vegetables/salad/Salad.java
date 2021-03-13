@@ -8,17 +8,28 @@ import java.util.HashMap;
 
 public class Salad {
     private ArrayList<AbstractVegetable> vegetables;
+
     private HashMap<String, Double> completeEnergy = new HashMap<String, Double>();
+
     public Salad(ArrayList<AbstractVegetable> veggies) {
         vegetables = veggies;
     }
-    public String buildSalad(ArrayList<AbstractVegetable> veggies) {
+
+    public Salad buildSalad(ArrayList<AbstractVegetable> veggies) {
+        this.vegetables = veggies;
+        calculateCalories();
+        return this;
+    }
+
+    public String buildSaladReport(ArrayList<AbstractVegetable> veggies) {
         this.vegetables = veggies;
         calculateCalories();
         return this.toString();
     }
+
     public Salad() {
     }
+
     private void calculateCalories() {
         for (AbstractVegetable veggie : vegetables) {
             completeEnergy.put("Fats", completeEnergy.getOrDefault("Fats", 0.) + veggie.getFats());
@@ -27,9 +38,7 @@ public class Salad {
             completeEnergy.put("Calories", completeEnergy.getOrDefault("Calories", 0.) + veggie.getCalories());
         }
     }
-    public HashMap<String, Double> getEnergyMap() {
-        return completeEnergy;
-    }
+
     @Override
     public String toString() {
         String strToReturn = "";

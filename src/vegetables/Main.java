@@ -1,25 +1,23 @@
 package vegetables;
 import vegetables.AbstractVegetable.AbstractVegetable;
 import vegetables.cucumber.Cucumber;
-import vegetables.garlic.Garlic;
-import vegetables.onion.Onion;
 import vegetables.saladbuilder.SaladBuilder;
 import vegetables.stockroom.StockRoom;
 import vegetables.tomato.Tomato;
+import vegetables.vegetableFactory.VegetableEnum;
+import vegetables.vegetableFactory.VegetableFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
+
     public static void main(String[] args) {
-        StockRoom newStockRoom = new StockRoom();
+        StockRoom stockRoom = new StockRoom();
         SaladBuilder saladBuilder = new SaladBuilder();
+        stockRoom.fillStockRoom(VegetableEnum.GARLIC, VegetableEnum.TOMATO, VegetableEnum.CUCUMBER);
 
-        for(AbstractVegetable _veggie: new ArrayList<AbstractVegetable>(Arrays.asList(new Onion(), new Cucumber(), new Garlic(), new Tomato()))) {
-            newStockRoom.addVeggies(_veggie);
-        }
-
-        saladBuilder.buildSalad(newStockRoom.takeSomeVegetables(new ArrayList<AbstractVegetable>(Arrays.asList(new Onion(), new Cucumber()))));
+        saladBuilder.buildSalad(stockRoom.takeSomeVegetables());
 
         System.out.println(saladBuilder.getSaladReport());
     }

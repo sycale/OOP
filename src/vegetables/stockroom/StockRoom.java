@@ -2,43 +2,52 @@ package vegetables.stockroom;
 
 /*
     Author: Alex Sychov
- */
+*/
 
 import vegetables.AbstractVegetable.AbstractVegetable;
+import vegetables.vegetableFactory.VegetableEnum;
+import vegetables.vegetableFactory.VegetableFactory;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.stream.Collectors;
 
 public class StockRoom {
-    private ArrayList<AbstractVegetable> vegetableStock = new ArrayList<AbstractVegetable>();
+    private EnumMap<VegetableEnum, AbstractVegetable> vegetableStock = new EnumMap<VegetableEnum, AbstractVegetable>(VegetableEnum.class);
+
     private int capacity;
+
     @Override
     public String toString() {
         String tempStr = "";
-        for (AbstractVegetable v : vegetableStock) {
+        for (AbstractVegetable v : vegetableStock.values()) {
             tempStr += v.toString() + " --------- \n";
         }
         return tempStr;
     }
-    public ArrayList<AbstractVegetable> takeSomeVegetables(ArrayList<AbstractVegetable> veggiesToRemove) {
-        vegetableStock.stream().filter((vegetable) -> veggiesToRemove.contains(vegetable));
-        return (ArrayList<AbstractVegetable>) veggiesToRemove;
+
+    public void fillStockRoom(VegetableEnum ...veggies) {
+        for(VegetableEnum veggie : veggies) {
+            try {
+                vegetableStock.put(veggie, VegetableFactory.getInstance(veggie));
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
-    public StockRoom(AbstractVegetable veggie) {
-        vegetableStock.add(veggie);
-        capacity = vegetableStock.size();
+
+    public ArrayList<AbstractVegetable> takeSomeVegetables(VegetableEnum ...veggies) {
+        return (ArrayList<AbstractVegetable>) vegetableStock.values().stream().filter((veggie) -> Arrays.asList(veggies).contains(veggie.getVeggieType())).collect(Collectors.toList());
     }
-    public StockRoom(ArrayList<AbstractVegetable> veggies) {
-        vegetableStock = veggies;
-        capacity = vegetableStock.size();
-    }
+
     public StockRoom() {
         capacity = 0;
     }
+
     public int getCapacity() {
         return capacity;
-    }
-    public void addVeggies(AbstractVegetable veggie) {
-        vegetableStock.add(veggie);
-        this.capacity += 1;
     }
 }

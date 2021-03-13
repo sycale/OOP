@@ -1,4 +1,4 @@
-package vegetables.vegetableEnum;
+package vegetables.vegetableFactory;
 
 public enum VegetableEnum {
     GARLIC,
